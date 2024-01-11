@@ -6,6 +6,7 @@ import {
     ImageBackground,
     Dimensions,
     Image,
+    TouchableOpacity,
 } from 'react-native';
 
 import Svg, { Path } from 'react-native-svg';
@@ -58,6 +59,27 @@ const SeguroScreen = () => {
                 style={styles.card}>
             </Image>
             <Image source={require('../assets/QR_Senasa.jpg')} style={styles.qr}></Image>
+            <TouchableOpacity onPress={() => 
+                this.props.navigation.navigate('SettingScreen')}
+                style={{
+                    backgroundColor: "#F3DE6B",
+                    padding: 10,
+                    marginTop: "5%",
+                    width: "50%",
+                    alignSelf: "center",
+                    borderRadius: 10,
+                }}
+            >  
+                <Text
+                    style={{
+                        fontSize: 15,
+                        textAlign: "center",
+                        color: "white",
+                    }}
+                >
+                    Modificar o agregar seguro
+                </Text>
+            </TouchableOpacity>
         </View>
     )
 }

@@ -6,7 +6,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
 import SettingScreen from "../screens/SettingScreen";
 import Login from "../screens/Login";
-import ActaScreen from "../screens/ActaScreen";
 import LicenceScreen from "../screens/LicenceScreen";
 import SeguroScreen from "../screens/SeguroScreen";
 import Cuenta from "../screens/Cuenta";
@@ -66,17 +65,6 @@ function MyTabs() {
                     tabBarLabel: 'Inicio',
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesome name="home" size={24} color={color} />
-                    ),
-                    headerShown: false,
-                }}
-            />
-            <Tab.Screen
-                name="Acta"
-                component={ActaScreen}
-                options={{
-                    tabBarLabel: 'Acta',
-                    tabBarIcon: ({ color, size }) => (
-                        <Entypo name="text-document" size={24} color={color} />
                     ),
                     headerShown: false,
                 }}

@@ -1,49 +1,48 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Dimensions, ScrollView, TouchableOpacity, ActivityIndicator} from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, TextInput, Dimensions, ScrollView, TouchableOpacity} from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import ButtonGradient from '../ButtonGradient';
 import { LinearGradient } from 'expo-linear-gradient';
-import { FIREBASE_AUTH } from '../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+
+//Firebase
+//import { getAuth, createUserWithEmailAndPassword, singInWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+//import { initializeApp } from 'firebase/app';
+//import { firebaseConfig } from './firebase';
 
 const { width , height } = Dimensions.get('window')
 
-const Login = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false);
+export default function Login() {
+/*
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
+
   const app = initializeApp(firebaseConfig);
-  const auth = FIREBASE_AUTH;
+  const auth = getAuth(app);
 
   const handleCreateAccount = () => {
-    setLoading(True);
-    try {
-      const response = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(response);
-    }
-    } catch(error: any) {
-      console.log(error);
-      alert('Sign in fallido: ' + error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
-  //Para iniciar sesion con una cuenta existente
-  const handledSignIn = () => {
-    setLoading(True);
-    firebase.auth().signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      //Mensaje de inicio de sesión exitoso
+    createUserWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      console.log('Cuenta creada!')
       const user = userCredential.user;
-      console.log('Inicio de sesión exitoso', user);
+      console.log(user)
     })
     .catch(error => {
-      console.log(error);
-    });
-  };
-
-
+      console.log(error)
+    })
+  }
+  const handledSignIn = () => {
+    signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      console.log('Inicio de sesion exitoso!')
+      const user = userCredential.user;
+      console.log(user)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+*/
   function SvgTop() {
     return (
     <Svg
@@ -79,24 +78,16 @@ const Login = () => {
         <Text style={styles.titulo}>Hola!</Text>
         <Text style={styles.subtitulo}>Ingresa a tu cuenta</Text>
         <TextInput 
-          value={email}
           placeholder='juanita@email.com'
-          autoCapitalize='none'
-          onChangeText={(text) => setEmail(text)}
+          //onChangeText={() => setEmail}
           style={styles.textInput}
           />
         <TextInput 
-          value={password}
-          placeholder='Contraseña'
-          autoCapitalize='none'
-          onChangeText={(text) => setPassword(text)}
+          placeholder='contraseña'
+          //onChangeText={() => setPassword}
           style={styles.textInput}
           secureTextEntry={true}
           />
-          { loading ? <ActivityIndicator size="large" color='#0000ff' />
-          : <>
-          <Button title="Login" onPress={() =>
-          </>}}
           <ButtonGradient/>
           <TouchableOpacity style={styles.forgotPassword}>
             <LinearGradient
@@ -113,7 +104,7 @@ const Login = () => {
       </View>
     </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -166,5 +157,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#000',
     fontWeight: 'bold',
-  },
+  }
 });

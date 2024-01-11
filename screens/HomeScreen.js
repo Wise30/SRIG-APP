@@ -7,8 +7,11 @@ import {
     Dimensions,
     Image,
     ScrollView,
+    TouchableOpacity,
 } from 'react-native';
 
+import Login from "../screens/Login";
+import { useNavigation } from "@react-navigation/native";
 import Svg, { Path } from 'react-native-svg';
 
 const width_screen = Dimensions.get('window').width;
@@ -33,6 +36,9 @@ const card_size_2 = {
 };
 
 const HomeScreen = () => {
+
+    const navigation = useNavigation();
+
     return(
         <ScrollView>
             <ImageBackground>
@@ -62,8 +68,7 @@ const HomeScreen = () => {
                         fontSize: 30,
                         textAlign: "center",
                         marginTop: "15%"
-                    }}
-                    >Cédula</Text>
+                    }}> Cédula </Text>
                 </Svg>
             </ImageBackground>                
             <Image
@@ -100,6 +105,29 @@ const HomeScreen = () => {
             <Text style={styles.textdesc}
             > LA VEGA</Text></Text>
             <Image source={require('../assets/QR.jpg')} style={styles.qr}></Image>
+
+
+            <TouchableOpacity onPress={() => 
+                this.props.navigation.navigate('SettingScreen')}
+                style={{
+                    backgroundColor: "#F3DE6B",
+                    padding: 10,
+                    marginTop: "5%",
+                    width: "50%",
+                    alignSelf: "center",
+                    borderRadius: 10,
+                }}
+            >  
+                <Text
+                    style={{
+                        fontSize: 15,
+                        textAlign: "center",
+                        color: "white",
+                    }}
+                >
+                    Modificar o agregar cédula
+                </Text>
+            </TouchableOpacity>
         </ScrollView>
     );
 };
