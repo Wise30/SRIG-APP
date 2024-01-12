@@ -10,7 +10,6 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-import Login from "../screens/Login";
 import { useNavigation } from "@react-navigation/native";
 import Svg, { Path } from 'react-native-svg';
 
@@ -43,7 +42,7 @@ const HomeScreen = () => {
         <ScrollView>
             <ImageBackground>
                 <Svg
-                        width={427}
+                        width={387}
                         height={149}
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +66,7 @@ const HomeScreen = () => {
                         style={{
                         fontSize: 30,
                         textAlign: "center",
-                        marginTop: "15%"
+                        marginTop: "20%"
                     }}> Cédula </Text>
                 </Svg>
             </ImageBackground>                
@@ -107,8 +106,8 @@ const HomeScreen = () => {
             <Image source={require('../assets/QR.jpg')} style={styles.qr}></Image>
 
 
-            <TouchableOpacity onPress={() => 
-                this.props.navigation.navigate('SettingScreen')}
+            <TouchableOpacity 
+            onPress={() => navigation.navigate("Camera")}
                 style={{
                     backgroundColor: "#F3DE6B",
                     padding: 10,

@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
+import { useNavigation } from "@react-navigation/native";
 import Svg, { Path } from 'react-native-svg';
 
 const width_screen = Dimensions.get('window').width;
@@ -23,11 +24,12 @@ const card_size = {
 
 
 const LicenceScreen = () => {
+    const navigation = useNavigation();
     return (
         <ScrollView>
                         <ImageBackground>
                 <Svg
-                        width={427}
+                        width={387}
                         height={149}
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +53,7 @@ const LicenceScreen = () => {
                         style={{
                         fontSize: 30,
                         textAlign: "center",
-                        marginTop: "15%"
+                        marginTop: "20%"
                     }}
                     >Licencia</Text>
                 </Svg>
@@ -85,8 +87,8 @@ const LicenceScreen = () => {
             <Text style={styles.textdesc}
             > NINGUNA</Text></Text>
             <Image source={require('../assets/QR_Intrant.jpg')} style={styles.qr}></Image>
-            <TouchableOpacity onPress={() => 
-                this.props.navigation.navigate('SettingScreen')}
+            <TouchableOpacity 
+            onPress={() => navigation.navigate("Camera")}
                 style={{
                     backgroundColor: "#F3DE6B",
                     padding: 10,

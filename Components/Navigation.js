@@ -5,10 +5,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //screens
 import HomeScreen from "../screens/HomeScreen";
 import SettingScreen from "../screens/SettingScreen";
-import Login from "../screens/Login";
+//import Login from "../screens/Login";
 import LicenceScreen from "../screens/LicenceScreen";
 import SeguroScreen from "../screens/SeguroScreen";
 import Cuenta from "../screens/Cuenta";
+import Camera from "../screens/Camera"
+import Login from "../TypeScript/Login"
 
 //Icons
 import { FontAwesome } from '@expo/vector-icons';
@@ -42,6 +44,10 @@ function MyStack() {
             <HomeStackNavigator.Screen
                 name="Cuenta"
                 component={Cuenta}
+            />
+            <HomeStackNavigator.Screen
+                name="Camera"
+                component={Camera}
             />
         </HomeStackNavigator.Navigator>
     )

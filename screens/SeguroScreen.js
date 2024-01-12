@@ -9,6 +9,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
+import { useNavigation } from "@react-navigation/native";
 import Svg, { Path } from 'react-native-svg';
 
 const width_screen = Dimensions.get('window').width;
@@ -21,11 +22,14 @@ const card_size = {
 };
 
 const SeguroScreen = () => {
+
+    const navigation = useNavigation();
+
     return (
         <View>
             <ImageBackground>
                 <Svg
-                        width={427}
+                        width={387}
                         height={149}
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +53,7 @@ const SeguroScreen = () => {
                         style={{
                         fontSize: 30,
                         textAlign: "center",
-                        marginTop: "15%"
+                        marginTop: "20%"
                     }}
                     >Seguro</Text>
                 </Svg>
@@ -59,8 +63,8 @@ const SeguroScreen = () => {
                 style={styles.card}>
             </Image>
             <Image source={require('../assets/QR_Senasa.jpg')} style={styles.qr}></Image>
-            <TouchableOpacity onPress={() => 
-                this.props.navigation.navigate('SettingScreen')}
+            <TouchableOpacity 
+            onPress={() => navigation.navigate("Camera")}
                 style={{
                     backgroundColor: "#F3DE6B",
                     padding: 10,
