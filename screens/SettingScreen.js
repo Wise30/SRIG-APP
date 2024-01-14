@@ -7,7 +7,8 @@ const SettingScreen = () => {
     const navigation = useNavigation();
 
     return (
-        <View>
+        <View
+        style={styles.Botones}>
             <Text 
                 style={{
                     fontSize: 30,
@@ -17,7 +18,7 @@ const SettingScreen = () => {
             >Settings</Text>
             
             <TouchableOpacity
-                onPress={() => navigation.navigate("Login")}
+                onPress={() => navigation.navigate("Account")}
                 style={{
                     backgroundColor: "#F3DE6B",
                     padding: 10,
@@ -34,7 +35,7 @@ const SettingScreen = () => {
                         color: "white",
                     }}
                 >
-                    Ir a Iniciar Sesion
+                    Cuenta
                 </Text>
             </TouchableOpacity>
 
@@ -59,8 +60,57 @@ const SettingScreen = () => {
                     Modificar cuenta
                 </Text>
             </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => navigation.navigate("Beneficios")}
+                style={{
+                    backgroundColor: "#F3DE6B",
+                    padding: 10,
+                    marginTop: "5%",
+                    width: "50%",
+                    alignSelf: "center",
+                    borderRadius: 10,
+                }}
+            >  
+                <Text
+                    style={{
+                        fontSize: 15,
+                        textAlign: "center",
+                        color: "white",
+                    }}
+                >
+                    Beneficios
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => navigation.navigate("Contacto")}
+                style={{
+                    backgroundColor: "#F3DE6B",
+                    padding: 10,
+                    marginTop: "5%",
+                    width: "50%",
+                    alignSelf: "center",
+                    borderRadius: 10,
+                }}
+            >  
+                <Text
+                    style={{
+                        fontSize: 15,
+                        textAlign: "center",
+                        color: "white",
+                    }}
+                >
+                    Contactanos
+                </Text>
+            </TouchableOpacity>
         </View>
     )
 }
 
 export default SettingScreen;
+
+const styles = StyleSheet.create({
+    Botones: {
+        marginTop: 150,
+        marginLeft: 0,
+    },
+});

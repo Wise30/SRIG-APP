@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity } from 
 import ButtonGradients from '../Components/ButtonGradients';
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-
+import { FIREBASE_AUTH } from '../Firebase';
 
 export default function Cuenta() {
     return ( 
@@ -32,7 +32,9 @@ export default function Cuenta() {
             <TouchableOpacity style = { styles.botones } showIcon> 
                 <Ionicons name="notifications" size={24} color="black"/>
             </TouchableOpacity >
-            <TouchableOpacity style = { styles.botones } showIcon> 
+            <TouchableOpacity 
+            onPress={() => FIREBASE_AUTH.signOut()}
+            style = { styles.botones } showIcon> 
                 <AntDesign name="logout" size={24} color="black" />
             </TouchableOpacity >
         </ScrollView>
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#f1f1f1',
+        marginTop: 60,
     },
     subContainer: {
         alignItems: 'center',
