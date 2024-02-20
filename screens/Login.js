@@ -5,44 +5,10 @@ import Svg, { Path } from 'react-native-svg';
 import ButtonGradient from '../ButtonGradient';
 import { LinearGradient } from 'expo-linear-gradient';
 
-//Firebase
-//import { getAuth, createUserWithEmailAndPassword, singInWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-//import { initializeApp } from 'firebase/app';
-//import { firebaseConfig } from './firebase';
-
 const { width , height } = Dimensions.get('window')
 
 export default function Login() {
-/*
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  const handleCreateAccount = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      console.log('Cuenta creada!')
-      const user = userCredential.user;
-      console.log(user)
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  }
-  const handledSignIn = () => {
-    signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      console.log('Inicio de sesion exitoso!')
-      const user = userCredential.user;
-      console.log(user)
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  }
-*/
   function SvgTop() {
     return (
     <Svg

@@ -123,7 +123,7 @@ function MyTabs() {
                 name="Settings"
                 component={MyStack}
                 options={{
-                    tabBarLabel: 'Settings',
+                    tabBarLabel: 'Configuración',
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="settings" size={24} color={color} />                
                     ),

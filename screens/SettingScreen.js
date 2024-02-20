@@ -15,7 +15,7 @@ const SettingScreen = () => {
                     textAlign: "center",
                     marginTop: "20%"
                 }}
-            >Settings</Text>
+            >Configuración</Text>
             
             <TouchableOpacity
                 onPress={() => navigation.navigate("Account")}

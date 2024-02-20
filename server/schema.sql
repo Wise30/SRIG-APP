@@ -3,8 +3,27 @@ CREATE DATABASE SRIG;
 USE SRIG;
 
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255)
+    idUser INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(25) NOT NULL,
+    Apellido VARCHAR(25) NOT NULL,
+    Cedula VARCHAR(25) NOT NULL,
+    email VARCHAR(25) UNIQUE NOT NULL,
+    password VARCHAR(25) NOT NULL,
+    Estado VARCHAR(25) NOT NULL
 );
+
+CREATE TABLE Cedula (
+    idCedula INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(25) NOT NULL,
+    Apellido VARCHAR(25) NOT NULL,
+    Cedula BLOB(10M) NOT NULL,
+    Estado VARCHAR(25) NOT NULL
+    Municipio VARCHAR(55) NOT NULL,
+    Sector VARCHAR(55) NOT NULL,
+    Residencia VARCHAR(55) NOT NULL,
+    ColegioE VARCHAR(55) NOT NULL,
+    DColegioE VARCHAR (70) NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) references users(idUser) ON DELETE CASCADE
+);
+
