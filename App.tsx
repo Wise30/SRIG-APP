@@ -79,11 +79,11 @@ function MyStack() {
 }
 
 
-function MyTabs() {
+export function MyTabs() {
     return(
         //Botones de navegación abajo
         <Tab.Navigator
-            initialRouteName="Login"
+            initialRouteName="Home"
             screenOptions= {{
                 tabBarActiveBackgroundColor: '#F3DE6B',
             }}

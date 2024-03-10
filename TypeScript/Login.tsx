@@ -1,141 +1,202 @@
-import { View, StyleSheet, TextInput, ActivityIndicator, Button, KeyboardAvoidingView, Dimensions } from "react-native";
-import React, { useState } from "react";
-import { FIREBASE_AUTH } from "../Firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import Svg, { Path } from "react-native-svg";
-
-const { width , height } = Dimensions.get('window')
-
-const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
-    const auth = FIREBASE_AUTH;
-
-    const signIn = async () => {
-        setLoading(true);
-        try {
-            const response = await signInWithEmailAndPassword(auth, email, password);
-            console.log(response);
-        } catch (error: any){
-            console.log(error);
-            alert('Inicio de sesión fallido: ' + error.message);
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    const signUp = async () => {
-        setLoading(true);
-        try {
-            const response = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(response);
-            alert('Revisa tus correos!');
-        } catch (error: any){
-            console.log(error);
-            alert('Sign in failed: ' + error.message)
-        } finally {
-            setLoading(false);
-        }
-    }
+import {
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+    TextInput,
+    Platform,
+    Dimensions,
+  } from "react-native";
+  import React, { useState } from "react";
+  import Colors from "../Components/colors";
+  import { Feather } from "@expo/vector-icons";
+  import { FIREBASE_AUTH, FIRESTORE_DB } from "../Firebase";
+  import { Entypo } from "@expo/vector-icons";
+  import { signInWithEmailAndPassword } from "firebase/auth";
+import { MyTabs } from "../App";
+  
+  const { width, height } = Dimensions.get("window");
+  let top;
+  if (Platform.OS === "ios") {
+    top = height * 0.02;
+  } else {
+    top = 0;
+  }
+  
+  export default function Login({ navigation }: { navigation: any }) {
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<any>("");
+    const [loading, setLoading] = useState<boolean>(false);
+  
+    const handleSignin = async () => {
+      setLoading(true);
+      await
+      signInWithEmailAndPassword(FIREBASE_AUTH, email.trim(), password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          setLoading(false);
+          alert("Inicio de sesión exitoso :)");
+          navigation.navigate(MyTabs);
+        })
+        .catch((err: any) => {
+          alert(err.meassage);
+        });
+    };
+  
     return (
-        <View style={styles.container}>
-            <KeyboardAvoidingView behavior="padding">
-                <TextInput value={email} style={styles.input} placeholder="Email" autoCapitalize="none" onChangeText={(text) => setEmail(text)}></TextInput>
-                <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder="Password" autoCapitalize="none" onChangeText={(text) => setPassword(text)}></TextInput>
-
-                { loading ? 
-                    (<ActivityIndicator size="large" color="#0000ff" />
-                ) : (
-                    <>
-                        <Button title="Login" onPress={signIn} />
-                        <Button title="Create account" onPress={signUp} />
-                    </>
-                )}
-            </KeyboardAvoidingView>
+      <View style={styles.container}>
+        <View style={styles.loginHeader}>
+          <Text style={styles.loginHeaderText}>Inicia Sesión ! 🚀</Text>
         </View>
+  
+        <View style={styles.loginContainer}>
+          {/* Email */}
+          <View style={styles.emailContainer}>
+            <Text style={styles.emailText}>Correo</Text>
+            <TextInput
+              style={styles.emailInput}
+              placeholder="Introduce tu correo"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+            />
+          </View>
+          {/* Password */}
+          <View style={styles.passwordContainer}>
+            <Text style={styles.passwordText}>Contraseña</Text>
+            <TextInput
+              style={styles.passwordInput}
+              placeholder="Introduce tu contraseña"
+              value={password}
+              secureTextEntry={true}
+              onChangeText={(text) => setPassword(text)}
+            />
+          </View>
+          {/* Forgot Password */}
+          <View style={styles.forgotContainer}>
+            <TouchableOpacity onPress={() => navigation.push("Forgot")}>
+              <Text style={styles.forgotText}>Olvidaste tu contraseña?</Text>
+            </TouchableOpacity>
+          </View>
+          {/* Login Button */}
+          <View style={styles.loginButton}>
+            <TouchableOpacity onPress={handleSignin}>
+              <Text style={styles.loginButtonText}>
+                {
+                  loading ? "Loading" : "Login"
+                }
+              </Text>
+            </TouchableOpacity>
+          </View>
+  
+          <View style={styles.signupGroup}>
+            <Text style={styles.new}>Nuevo aquí?</Text>
+            <TouchableOpacity onPress={() => navigation.push("Details")}>
+              <Text style={styles.signup}>Registrate!</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
     );
-};
-
-function SvgTop() {
-    return (
-    <Svg
-        width={427}
-        height={149}
-        fill="none"
-    >
-        <Path
-            d="M211.614 136.209a660.372 660.372 0 0 0 44.785-8.637c127.302-29.106 166.777-12.127 170.601 0V.466L-1 0v127.572c43.731-16.17 146.957-38.808 198.037 0 4.36 3.313 9.248 6.178 14.577 8.637Z"
-            fill="#EBC500"
-            fillOpacity={0.58}
-        />
-        <Path
-            d="M427 127.572c-3.824-12.127-43.299-29.106-170.601 0a660.372 660.372 0 0 1-44.785 8.637c57.093 26.354 164.742 6.153 215.386-8.637Z"
-            fill="#EBC500"
-            fillOpacity={0.14}
-        />
-        <Path
-            d="M197.037 127.572c-51.08-38.808-154.306-16.17-198.037 0 27.913 10.659 107.937 25.065 212.614 8.637-5.329-2.459-10.217-5.324-14.577-8.637Z"
-            fill="#EBC500"
-            fillOpacity={0.58}
-        />
-    </Svg>
-    )
-}
-
-export default Login;
-
-const styles = StyleSheet.create({
-    mainContainer: {
-        backgroundColor: '#f1f1f1',
-        flex: 1,
-    },
+  }
+  
+  const styles = StyleSheet.create({
     container: {
-        marginHorizontal: 20,
-        flex: 1,
-        justifyContent: 'center'
+      flex: 1,
+      marginHorizontal: 15,
+      marginTop: height * 0.05,
     },
-    containerSVG: {
-        width: width,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
+    arrowContainer: {
+      width: 40,
+      height: 40,
+      borderTopLeftRadius: 8,
+      borderBottomRightRadius: 8,
+      backgroundColor: Colors.primary,
+      justifyContent: "center",
+      alignItems: "center",
     },
-    titulo: {
-        fontSize: 80,
-        color: '#344340',
-        fontWeight: 'bold',
+    loginHeader: {
+      marginTop: 20,
     },
-    subtitulo: {
-        fontSize: 20,
-        color: 'gray',
+    loginHeaderText: {
+      fontSize: 36,
+      fontWeight: "bold",
     },
-    input: {
-        padding: 10,
-        paddingStart: 30,
-        width: '80%',
-        height: 50,
-        marginTop: 20,
-        borderRadius: 30,
-        backgroundColor: '#fff',
+    loginContainer: {
+      marginTop: 20,
     },
-    forgotPassword: {
-        fontSize: 14,
-        color: 'gray',
-        marginTop: 20,
-        width: 200,
-        alignItems: 'center',
+    emailContainer: {
+      marginTop: 20,
     },
-    button: {
-        width: '80%',
-        height: 50,
-        borderRadius: 25,
-        padding: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
+    emailText: {
+      fontSize: 20,
+      fontWeight: "bold",
     },
-    text: {
-        fontSize: 14,
-        color: '#000',
-        fontWeight: 'bold',
-    }
-});
+    emailInput: {
+      marginTop: 10,
+      width: "100%",
+      height: 50,
+      backgroundColor: Colors.light,
+      borderWidth: 1,
+      borderColor: Colors.light,
+      borderRadius: 8,
+      paddingLeft: 10,
+    },
+    passwordContainer: {
+      marginTop: 20,
+    },
+    passwordText: {
+      fontSize: 20,
+      fontWeight: "bold",
+    },
+    passwordInput: {
+      marginTop: 10,
+      width: "100%",
+      height: 50,
+      backgroundColor: Colors.light,
+      borderRadius: 8,
+      paddingLeft: 10,
+      borderWidth: 1,
+      borderColor: Colors.light,
+    },
+    forgotContainer: {
+      marginTop: 20,
+      alignItems: "flex-end",
+    },
+    forgotText: {
+      fontSize: 16,
+      fontWeight: "bold",
+      color: Colors.deep,
+    },
+    loginButton: {
+      marginTop: 20,
+      width: "100%",
+      height: 50,
+      backgroundColor: Colors.secondary,
+      borderRadius: 8,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    loginButtonText: {
+      fontSize: 16,
+      fontWeight: "bold",
+      color: Colors.white,
+    },
+    signupGroup: {
+      flexDirection: "row",
+      marginTop: 10,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    signup: {
+      color: Colors.deep,
+      fontSize: 16,
+      fontWeight: "bold",
+      marginRight: 5,
+    },
+    new: {
+      fontSize: 16,
+      fontWeight: "500",
+      marginRight: 5,
+      fontWeight: "bold"
+    },
+  });
