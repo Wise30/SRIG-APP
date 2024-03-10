@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Login from "./TypeScript/Login";
+import Welcome from "./screens/welcome";
 import { useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from "firebase/auth";
 import { FIREBASE_AUTH } from "./Firebase";
@@ -19,6 +20,7 @@ import Camera from "./screens/Camera";
 import Cuenta from "./screens/Cuenta"; 
 import Beneficios from "./screens/Beneficios";
 import Contacto from "./screens/Contacto";
+import Registro from "./screens/Registro";
 import Account from "./screens/Account";
 
 //Icons
@@ -135,23 +137,54 @@ function MyTabs() {
     );
 }
 
-export default function App() {
-  const [user, setUser] = useState<User | null>(null);
+export function WelcomeLayout(){
+    return (
+        <HomeStackNavigator.Navigator
+          initialRouteName='Welcome'
+        >
+          <HomeStackNavigator.Screen
+            name="Welcome"
+            component={Welcome}
+            options={{
+              headerShown: false
+            }}
+          />
+          <HomeStackNavigator.Screen
+            name="Login"
+            component={Login}
+            options={{
+              headerShown: false
+            }}
+          />
+          <HomeStackNavigator.Screen
+            name="Registro"
+            component={Registro}
+            options={{
+              headerShown: false
+            }}
+          />
+        </HomeStackNavigator.Navigator>
+    );
+  }
+  
 
-  useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      setUser(user);
+export default function App() {
+    const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        onAuthStateChanged(FIREBASE_AUTH, (user) => {
+        setUser(user);
     });
-  }, []);
-  return (
+    }, []);
+    return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator initialRouteName="Welcome">
         {user ?
-          <Stack.Screen name="Inside" component={MyTabs} options={{ headerShown: false  }} />
+        <Stack.Screen name="Inside" component={MyTabs} options={{ headerShown: false  }} />
         : 
-          <Stack.Screen name="Login" component={Login} options={{ headerShown: false  }} />
+        <Stack.Screen name="WelcomeLayout" component={WelcomeLayout} options={{ headerShown: false  }} />
         }
-      </Stack.Navigator>
+    </Stack.Navigator>
     </NavigationContainer>
-  );
+    );
 };
