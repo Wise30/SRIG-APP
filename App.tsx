@@ -22,6 +22,9 @@ import Beneficios from "./screens/Beneficios";
 import Contacto from "./screens/Contacto";
 import Registro from "./screens/Registro";
 import Account from "./screens/Account";
+import camS from "./screens/camS";
+import camaraC from "./screens/camaraC";
+import cameraL from "./screens/cameraL";
 
 //Icons
 import { FontAwesome } from '@expo/vector-icons';
@@ -41,7 +44,7 @@ const Tab = createBottomTabNavigator();
 //El HomeStack es para las aplicaciones que se encuentran en la pestaña de settings
 const HomeStackNavigator = createNativeStackNavigator();
 
-function MyStack() {
+export function MyStack() {
     return (
         <HomeStackNavigator.Navigator
             initialRouteName="SettingScreen"
@@ -63,8 +66,9 @@ function MyStack() {
                 options={{ headerShown: false  }}
             />
             <HomeStackNavigator.Screen
-                name="Camera"
-                component={Camera}
+                name="camaraC"
+                component={camaraC}
+                options={{ headerShown: false  }}
             />
             <HomeStackNavigator.Screen
                 name="Beneficios"

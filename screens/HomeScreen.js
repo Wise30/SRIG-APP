@@ -106,7 +106,7 @@ const HomeScreen = () => {
 
 
             <TouchableOpacity 
-            onPress={() => navigation.navigate("Camera")}
+            onPress={() => navigation.navigate("camaraC")}
                 style={{
                     backgroundColor: "#F3DE6B",
                     padding: 10,
