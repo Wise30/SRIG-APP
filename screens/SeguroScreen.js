@@ -1,16 +1,20 @@
-import React from "react";
+import React from 'react';
 import {
     StyleSheet,
     Text,
-    View,
     ImageBackground,
     Dimensions,
     Image,
+    ScrollView,
     TouchableOpacity,
+    View
 } from 'react-native';
 
 import { useNavigation } from "@react-navigation/native";
 import Svg, { Path } from 'react-native-svg';
+import { useState, useEffect } from "react";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { FIREBASE_AUTH } from '../Firebase';
 
 const width_screen = Dimensions.get('window').width;
 
@@ -24,6 +28,23 @@ const card_size = {
 const SeguroScreen = () => {
 
     const navigation = useNavigation();
+    const [imageUrl, setImageUrl] = useState('');
+    const userID = FIREBASE_AUTH.currentUser.uid;
+
+    useEffect(() => {
+        const storage = getStorage();
+        const imageRef = ref(storage, `images/seguro/${userID}.jpg`);
+  
+        getDownloadURL(imageRef)
+            .then((url) => {
+            // Set the image URL
+            setImageUrl(url);
+        })
+        .catch((error) => {
+            // Handle any errors
+            console.error("Error fetching image:", error);
+        });
+    }, []);
 
     return (
         <View>
@@ -59,9 +80,11 @@ const SeguroScreen = () => {
                 </Svg>
             </ImageBackground>     
             <Image
-                source={require('../assets/Seguro-1.png')}
-                style={styles.card}>
-            </Image>
+                style={styles.card}
+                source={{
+                uri: imageUrl
+                }}
+            />
             <Image source={require('../assets/QR_Senasa.jpg')} style={styles.qr}></Image>
             <TouchableOpacity 
             onPress={() => navigation.navigate("camS")}

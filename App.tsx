@@ -47,7 +47,6 @@ const HomeStackNavigator = createNativeStackNavigator();
 export function MyStack() {
     return (
         <HomeStackNavigator.Navigator
-            initialRouteName="SettingScreen"
         >
             <HomeStackNavigator.Screen
                 name="SettingScreen"
