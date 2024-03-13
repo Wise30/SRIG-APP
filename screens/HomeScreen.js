@@ -7,10 +7,14 @@ import {
     Image,
     ScrollView,
     TouchableOpacity,
+    View
 } from 'react-native';
 
 import { useNavigation } from "@react-navigation/native";
 import Svg, { Path } from 'react-native-svg';
+import { useState, useEffect } from "react";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { FIREBASE_AUTH } from '../Firebase/config';
 
 const width_screen = Dimensions.get('window').width;
 
@@ -36,6 +40,23 @@ const card_size_2 = {
 const HomeScreen = () => {
 
     const navigation = useNavigation();
+    const [imageUrl, setImageUrl] = useState('');
+    const userID = FIREBASE_AUTH.currentUser.uid;
+
+    useEffect(() => {
+      const storage = getStorage();
+      const imageRef = ref(storage, `images/cedula/${userID}.jpg`);
+  
+      getDownloadURL(imageRef)
+        .then((url) => {
+          // Set the image URL
+          setImageUrl(url);
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.error("Error fetching image:", error);
+        });
+    }, []); // Empty dependency array means this effect runs once, similar to componentDidMount
 
     return(
         <ScrollView>
@@ -68,15 +89,14 @@ const HomeScreen = () => {
                         marginTop: "20%"
                     }}> Cédula </Text>
                 </Svg>
-            </ImageBackground>                
+            </ImageBackground>      
+
             <Image
-                source={require('../assets/cedula.png')}
-                style={styles.card}>
-            </Image>
-            <Image
-                source={require('../assets/Cedula_trasera.jpg')}
-                style={styles.card_2}>
-            </Image>
+                style={styles.card}
+                source={{
+                uri: imageUrl
+                }}
+            />
 
             <Text style={styles.text} //Numero del colegio electoral
             >Colegio Electoral: 
