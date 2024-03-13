@@ -64,7 +64,7 @@ const SeguroScreen = () => {
             </Image>
             <Image source={require('../assets/QR_Senasa.jpg')} style={styles.qr}></Image>
             <TouchableOpacity 
-            onPress={() => navigation.navigate("Camera")}
+            onPress={() => navigation.navigate("camS")}
                 style={{
                     backgroundColor: "#F3DE6B",
                     padding: 10,

@@ -8,9 +8,10 @@ import {
   SafeAreaView,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { listFiles, uploadToFirebase } from "../Firebase/config";
+import { listFiles, uploadToFirebase } from "../Firebase";
 import { useState, useEffect } from "react";
-import MyFilesList from "./MyList";
+import { FIREBASE_APP, FIREBASE_AUTH} from "../Firebase";
+
 
 export default function App() {
   const [permission, requestPermission] = ImagePicker.useCameraPermissions();

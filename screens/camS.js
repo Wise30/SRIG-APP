@@ -10,6 +10,8 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { listFiles, uploadToFirebase } from "../Firebase";
 import { useState, useEffect } from "react";
+import { FIREBASE_APP, FIREBASE_AUTH} from "../Firebase";
+
 
 export default function App() {
   const [permission, requestPermission] = ImagePicker.useCameraPermissions();

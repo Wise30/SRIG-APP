@@ -9,9 +9,12 @@ import {
     ScrollView,
     TouchableOpacity,
 } from 'react-native';
-
 import { useNavigation } from "@react-navigation/native";
 import Svg, { Path } from 'react-native-svg';
+
+import { useState, useEffect } from "react";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { FIREBASE_AUTH } from "../Firebase";
 
 const width_screen = Dimensions.get('window').width;
 
@@ -22,9 +25,26 @@ const card_size = {
     height: 373,
 };
 
-
 const LicenceScreen = () => {
     const navigation = useNavigation();
+    const [imageUrl, setImageUrl] = useState('');
+    const userID = FIREBASE_AUTH.currentUser.uid;
+
+    useEffect(() => {
+      const storage = getStorage();
+      const imageRef = ref(storage, `images/licencia/${userID}.jpg`);
+  
+      getDownloadURL(imageRef)
+        .then((url) => {
+          // Set the image URL
+          setImageUrl(url);
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.error("Error fetching image:", error);
+        });
+    }, []);
+  
     return (
         <ScrollView>
                         <ImageBackground>
@@ -57,11 +77,15 @@ const LicenceScreen = () => {
                     }}
                     >Licencia</Text>
                 </Svg>
-            </ImageBackground>     
+            </ImageBackground>  
+
             <Image
-                source={require('../assets/Licencia-1.png')}
-                style={styles.card}>
-            </Image>
+                style={styles.image}
+                source={{
+                uri: imageUrl
+                }}
+            />
+
             <Text style={styles.text} //Numero del colegio electoral
             >Cédula: 
             <Text style={styles.textdesc}
@@ -88,7 +112,7 @@ const LicenceScreen = () => {
             > NINGUNA</Text></Text>
             <Image source={require('../assets/QR_Intrant.jpg')} style={styles.qr}></Image>
             <TouchableOpacity 
-            onPress={() => navigation.navigate("Camera")}
+            onPress={() => navigation.navigate("cameraL")}
                 style={{
                     backgroundColor: "#F3DE6B",
                     padding: 10,

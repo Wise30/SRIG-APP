@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import Svg, { Path } from 'react-native-svg';
 import { useState, useEffect } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { FIREBASE_AUTH } from '../Firebase/config';
+import { FIREBASE_AUTH } from '../Firebase';
 
 const width_screen = Dimensions.get('window').width;
 

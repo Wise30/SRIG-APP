@@ -66,8 +66,23 @@ export function MyStack() {
                 options={{ headerShown: false  }}
             />
             <HomeStackNavigator.Screen
+                name="Camera"
+                component={Camera}
+                options={{ headerShown: false  }}
+            />
+            <HomeStackNavigator.Screen
                 name="camaraC"
                 component={camaraC}
+                options={{ headerShown: false  }}
+            />
+            <HomeStackNavigator.Screen
+                name="camS"
+                component={camS}
+                options={{ headerShown: false  }}
+            />
+            <HomeStackNavigator.Screen
+                name="cameraL"
+                component={cameraL}
                 options={{ headerShown: false  }}
             />
             <HomeStackNavigator.Screen
@@ -144,14 +159,14 @@ export function MyTabs() {
 export function WelcomeLayout(){
     return (
         <HomeStackNavigator.Navigator
-          initialRouteName='Welcome'
+            initialRouteName='Welcome'
         >
-          <HomeStackNavigator.Screen
-            name="Welcome"
-            component={Welcome}
-            options={{
-              headerShown: false
-            }}
+            <HomeStackNavigator.Screen
+                name="Welcome"
+                component={Welcome}
+                options={{
+                    headerShown: false
+                }}
           />
           <HomeStackNavigator.Screen
             name="Login"
