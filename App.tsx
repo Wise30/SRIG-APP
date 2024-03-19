@@ -25,6 +25,7 @@ import Account from "./screens/Account";
 import camS from "./screens/camS";
 import camaraC from "./screens/camaraC";
 import cameraL from "./screens/cameraL";
+import BarCode from "./screens/BarCode";
 
 //Icons
 import { FontAwesome } from '@expo/vector-icons';
@@ -44,6 +45,29 @@ const Tab = createBottomTabNavigator();
 //El HomeStack es para las aplicaciones que se encuentran en la pestaña de settings
 const HomeStackNavigator = createNativeStackNavigator();
 
+const CeduStackNavigator = createNativeStackNavigator();
+
+export function ceduStack(){
+    return (
+        <CeduStackNavigator.Navigator
+        >
+            <CeduStackNavigator.Screen
+                name="HomeScreen"
+                component={HomeScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <CeduStackNavigator.Screen
+                name="BarCode"
+                component={BarCode}
+                options={{ headerShown: false  }}
+            />
+        </CeduStackNavigator.Navigator>
+
+    )
+}
+
 export function MyStack() {
     return (
         <HomeStackNavigator.Navigator
@@ -62,16 +86,6 @@ export function MyStack() {
             <HomeStackNavigator.Screen
                 name="Cuenta"
                 component={Cuenta}
-                options={{ headerShown: false  }}
-            />
-            <HomeStackNavigator.Screen
-                name="Camera"
-                component={Camera}
-                options={{ headerShown: false  }}
-            />
-            <HomeStackNavigator.Screen
-                name="camaraC"
-                component={camaraC}
                 options={{ headerShown: false  }}
             />
             <HomeStackNavigator.Screen
